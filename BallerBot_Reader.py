@@ -9,7 +9,7 @@ import praw
 
 reddit = praw.Reddit('BallerBot')
 
-subreddit = reddit.subreddit("nba")
+subreddit = reddit.subreddit("learnpython")
 
 #Read only top 5 posts on the "hot" filter"
 for submission in subreddit.hot(limit=5):
