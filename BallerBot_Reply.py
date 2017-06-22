@@ -11,7 +11,7 @@ import re
 import os
 
 #Create the Reddit instance
-reddit = praw.Reddit("BallerBot")
+reddit = praw.Reddit("BallerBot", user_agent="BallerBot 0.0")
 
 #Creates an empty list or loads list of posts we have replied to and removes empty values
 
