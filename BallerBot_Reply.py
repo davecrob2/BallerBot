@@ -11,7 +11,7 @@ import re
 import os
 
 #Create the Reddit instance
-reddit = praw.Reddit("BallerBot")
+reddit = praw.Reddit('ballerbot')
 
 #Creates an empty list or loads list of posts we have replied to and removes empty values
 
@@ -39,5 +39,4 @@ for submission in subreddit.hot(limit = 5):
 with open("posts_replied_to.txt","w") as f:
 	for post_id in posts_replied_to:
 		f.write(post_id + "\n")
-        
-print(reddit.user.me())
+print(posts_replied_to)
