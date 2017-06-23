@@ -7,7 +7,7 @@ Created on Wed Jun 21 23:33:01 2017
 
 import praw
 
-reddit = praw.Reddit('BallerBot')
+reddit = praw.Reddit('ballerbot')
 
 subreddit = reddit.subreddit("learnpython")
 
