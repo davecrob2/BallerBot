@@ -11,11 +11,7 @@ import re
 import os
 
 #Create the Reddit instance
-<<<<<<< HEAD
 reddit = praw.Reddit('ballerbot')
-=======
-reddit = praw.Reddit("BallerBot", user_agent="BallerBot 0.0")
->>>>>>> 54210a5917a030e06d81534a2ec6dae569c01fe9
 
 #Creates an empty list or loads list of posts we have replied to and removes empty values
 
@@ -43,7 +39,3 @@ for submission in subreddit.hot(limit = 5):
 with open("posts_replied_to.txt","w") as f:
 	for post_id in posts_replied_to:
 		f.write(post_id + "\n")
-<<<<<<< HEAD
-print(posts_replied_to)
-=======
->>>>>>> 54210a5917a030e06d81534a2ec6dae569c01fe9
