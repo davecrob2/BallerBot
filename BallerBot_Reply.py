@@ -31,7 +31,9 @@ for submission in subreddit.hot(limit = 5):
 		#Search for keywords in the specified field, in this case: Title
 		if re.search("i love python",submission.title,re.IGNORECASE):
 			#Reply to the post with text, eventually the statistics of the player
-			submission.reply("Basketball is my favorite sport")
+			submission.reply("""What is your favorite sport?|Basketball is my favorite sport 
+                    :--:|:--
+                    What is the best sport?|Basketball""")
 			print("Bot replying to: ", submission.title)
 			#Store the current submission id into our list
 			posts_replied_to.append(submission.id)
