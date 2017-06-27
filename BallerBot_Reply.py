@@ -23,10 +23,11 @@ reddit = praw.Reddit('ballerbot')
 
 #Get the top 5 hot posts from r/NBA
 subreddit = reddit.subreddit('pythonforengineers')
-for submission in subreddit.hot(limit = 5):
-    for key in PlayerDict:
-        if key in submission.title:
-            submission.reply("""What is your favorite sport?|Basketball is my favorite sport 
-                    :--:|:--
-                    What is the best sport?|Basketball""")
-            print("Bot replying to: ", submission.title)
+
+for submission in subreddit.hot(limit = 10):
+    for top_level_comment in submission.comments:
+        for key in PlayerDict:
+            if key in top_level_comment.body:
+                top_level_comment.reply("It works!")
+            #print("Bot replying to: ", submission.title)
+
