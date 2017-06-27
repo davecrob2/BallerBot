@@ -7,7 +7,15 @@ Created on Mon Jun 26 23:20:28 2017
 
 import requests
 
+from string import ascii_lowercase
 from bs4 import BeautifulSoup
+#Iterates through alphabet to modify link to basketball reference pages
+
+link_list = []
+for a in ascii_lowercase:
+    link = "http://www.basketball-reference.com/players/%(a)s/" % {"a":a}
+    link_list.append(link)
+print(link_list)
 
 #Variable to store basketball reference player glossary
 page = requests.get("http://www.basketball-reference.com/players/a/")
@@ -52,3 +60,4 @@ player_dict[name]=id_extract
 #Test code to find all links. Needs to be modified to only find player links
 #for a in soup.find_all('a',href=True):
 #    print("Found the URL:",a['href'])
+
