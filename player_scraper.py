@@ -28,6 +28,7 @@ def bb_scrape(link):
     fullnames=[]
     links = []
     zipper={}
+
     
     #Iterates through page to pull all names and player ids
     for i in tr:
@@ -67,5 +68,6 @@ def bb_scrape(link):
     
         #Combines two lists into dictionary
         zipper=dict(zip(fullnames,links))
+    return zipper
     #dictionary.update(zipper)
     #print(dictionary)
