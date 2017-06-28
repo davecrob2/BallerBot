@@ -11,7 +11,6 @@ from string import ascii_lowercase
 #Iterates through alphabet to modify link to basketball reference pages
 
 link_list = []
-x = {}
 all_players={}
 for a in ascii_lowercase:
     link = "http://www.basketball-reference.com/players/%(a)s/" % {"a":a}
@@ -19,6 +18,7 @@ for a in ascii_lowercase:
 #print(link_list)
 try:
     for link in link_list:
-        bb_scrape(link)
+        all_players.update(bb_scrape(link))
+        
 except AttributeError:
     print("There are no names here")
