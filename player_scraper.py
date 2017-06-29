@@ -5,11 +5,10 @@ Created on Tue Jun 27 16:12:13 2017
 @author: davecrob2
 """
 import requests
-from string import ascii_lowercase
 from bs4 import BeautifulSoup
 
-all_players = {}
-
+#Function to scrape an individual basketball reference page and combine all player names and player ids into a dictionary.
+#Accepts the url to the page as an argument
 def bb_scrape(link):
     #Variable to store basketball reference player glossary
     page = requests.get(link)
@@ -18,7 +17,7 @@ def bb_scrape(link):
     soup = BeautifulSoup(page.content,'html.parser')
     
     
-    #Finds "tbody" tag which contains the enitre player table
+    #Finds "tbody" tag which contains the entire player table
     tbody=soup.find('tbody')
     #print(soup.find('tbody'))
     #print(tbody.prettify())
@@ -69,5 +68,3 @@ def bb_scrape(link):
         #Combines two lists into dictionary
         zipper=dict(zip(fullnames,links))
     return zipper
-    #dictionary.update(zipper)
-    #print(dictionary)
