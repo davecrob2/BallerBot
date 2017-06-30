@@ -1,2 +1,2 @@
 # BallerBot
-Reddit Bot delivering NBA Player statistics via mentions in the r/NBA subreddit using Basketball-Reference.com data.
+BallerBot is a Reddit Bot created to reply to user comments in the r/NBA subreddit. BallerBot searches comments for NBA player names and will reply to comments displaying current season statistics for the player referenced. The statistics are displayed in the form of a table and include common metrics such as FG%, Games Played, FT%, PPG, etc. BallerBot sources all data from Basketball-Reference.com and Sports-Reference.com.  Version 1.0 of BallerBot (Released XXXX).
