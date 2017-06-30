@@ -15,7 +15,7 @@ import os
 reddit = praw.Reddit('ballerbot')
 
 #Selects subreddit
-subreddit = reddit.subreddit('pythonforengineers')
+subreddit = reddit.subreddit('ballerbot')
 #List to store each basketball reference link
 link_list = []
 
