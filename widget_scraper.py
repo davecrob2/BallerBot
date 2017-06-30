@@ -36,23 +36,23 @@ def stat_scraper(widget_link):
     
     
     #Variables storing different season stats. Scrapes page for individual stat categories
-    games = widget_soup.find('td',{"data-stat":"ast_per_g"})
-    mp=widget_soup.find('td',{"data-stat":"mp_per_g"})
-    fg=widget_soup.find('td',{"data-stat":"fg_pct"})
-    three_p=widget_soup.find('td',{"data-stat":"fg3_pct"})
+    games = widget_soup.find_all('td',{"data-stat":"ast_per_g"})
+    mp=widget_soup.find_all('td',{"data-stat":"mp_per_g"})
+    fg=widget_soup.find_all('td',{"data-stat":"fg_pct"})
+    three_p=widget_soup.find_all('td',{"data-stat":"fg3_pct"})
     two_p=widget_soup.find_all('td',{"data-stat":"fg2_pct"})
-    eFG=widget_soup.find('td',{"data-stat":"efg_pct"})
-    FT=widget_soup.find('td',{"data-stat":"ft_pct"})
-    TRB=widget_soup.find('td',{"data-stat":"trb_per_g"})
-    AST=widget_soup.find('td',{"data-stat":"ast_per_g"})
-    STL=widget_soup.find('td',{"data-stat":"stl_per_g"})
-    BLK=widget_soup.find('td',{"data-stat":"blk_per_g"})
-    TOV=widget_soup.find('td',{"data-stat":"tov_per_g"})
-    PTS=widget_soup.find('td',{"data-stat":"pts_per_g"})
+    eFG=widget_soup.find_all('td',{"data-stat":"efg_pct"})
+    FT=widget_soup.find_all('td',{"data-stat":"ft_pct"})
+    TRB=widget_soup.find_all('td',{"data-stat":"trb_per_g"})
+    AST=widget_soup.find_all('td',{"data-stat":"ast_per_g"})
+    STL=widget_soup.find_all('td',{"data-stat":"stl_per_g"})
+    BLK=widget_soup.find_all('td',{"data-stat":"blk_per_g"})
+    TOV=widget_soup.find_all('td',{"data-stat":"tov_per_g"})
+    PTS=widget_soup.find_all('td',{"data-stat":"pts_per_g"})
     
     #Returns us the text for the final season for the specified stat category
-    print(two_p[final_season-1].get_text())
-    return two_p[final_season-1].get_text()
+    print(PTS[final_season-1].get_text())
+    return PTS[final_season-1].get_text()
 
 
 
