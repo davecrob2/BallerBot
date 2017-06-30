@@ -37,7 +37,7 @@ def stat_scraper(widget_link):
     
     
     #Variables storing different season stats. Scrapes page for individual stat categories
-    games = widget_soup.find_all('td',{"data-stat":"ast_per_g"})
+    games = widget_soup.find_all('td',{"data-stat":"g"})
     mp=widget_soup.find_all('td',{"data-stat":"mp_per_g"})
     fg=widget_soup.find_all('td',{"data-stat":"fg_pct"})
     three_p=widget_soup.find_all('td',{"data-stat":"fg3_pct"})
@@ -53,11 +53,13 @@ def stat_scraper(widget_link):
     
     #Returns us the text for the final season for the specified stat category
     #print(PTS[final_season-1].get_text())
-    return PTS[final_season-1].get_text()
+    #return PTS[final_season-1].get_text()
 
+    return '''[Code](https://github.com/davecrob2/BallerBot) | r/BallerBot | [Feedback](https://np.reddit.com/message/compose/?to=BallerBot&subject=Feedback)
 
-
-
+Games | MP | FG | 3P | 2P | eFG | FT | TRB | AST | STL | BLK | TOV | PTS
+    - | - | - | - | - | - | - | - | - | - | - | - | -
+    %(games)s | %(mp)s | %(fg)s | %(three_p)s | %(two_p)s | %(eFG)s | %(FT)s | %(TRB)s | %(AST)s | %(STL)s | %(BLK)s | %(TOV)s | %(PTS)s''' % {'games':games[final_season-1].get_text(),'mp':mp[final_season-1].get_text(),'fg':fg[final_season-1].get_text(),'three_p':three_p[final_season-1].get_text(),'two_p':two_p[final_season-1].get_text(),'eFG':eFG[final_season-1].get_text(),'FT':FT[final_season-1].get_text(),'TRB':TRB[final_season-1].get_text(),'AST':AST[final_season-1].get_text(),'STL':STL[final_season-1].get_text(),'BLK':BLK[final_season-1].get_text(),'TOV':TOV[final_season-1].get_text(),'PTS':PTS[final_season-1].get_text()} 
 #print(seasons)
 
 
