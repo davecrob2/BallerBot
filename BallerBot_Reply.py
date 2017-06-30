@@ -8,7 +8,7 @@ Created on Wed Jun 21 23:32:01 2017
 import praw
 from player_scraper import bb_scrape
 from string import ascii_lowercase
-
+from widget_scraper import stat_scraper
 
 
 #Create the Reddit instance
@@ -42,7 +42,14 @@ for submission in subreddit.hot(limit = 10):
     for top_level_comment in submission.comments:
         for key in all_players:
             if key in top_level_comment.body:
+                #To extract first letter of last name
+                letter = all_players[key]
+                #BR Widget that we scrape for statistics
+                widget_link='https://widgets.sports-reference.com/wg.fcgi?site=bbr&url=/players/%(letter)s/%(id)s.html&div=div_per_game' % {"letter":letter[0],'id':all_players[key]}
+                #Replying to comments
+                top_level_comment.reply(stat_scraper(widget_link))
+                
                 #if top_level_comment.id not in replied_to:
-                    top_level_comment.reply("It works!")
+                    #top_level_comment.reply("It works!")
             #print("Bot replying to: ", submission.title)
 

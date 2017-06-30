@@ -8,7 +8,7 @@ Created on Thu Jun 29 12:21:41 2017
 import requests
 from bs4 import BeautifulSoup
 
-link="https://widgets.sports-reference.com/wg.fcgi?site=bbr&url=/players/a/allenra02.html&div=div_per_game"
+
 
 def stat_scraper(widget_link):
     #Pulls in the widget page from Basketball Reference widget site
@@ -28,11 +28,12 @@ def stat_scraper(widget_link):
         season_list.append(i.get_text())
     #print(season_list)   
     
+    final_season=0
     #Search of season_list to determine where Career total is. This helps us return the stats from the final season
     if "Career" in season_list:
         #print('found')
         #Tells us the index of the Career totals
-        final_season =(season_list.index('Career'))
+        final_season=(season_list.index('Career'))
     
     
     #Variables storing different season stats. Scrapes page for individual stat categories
@@ -51,7 +52,7 @@ def stat_scraper(widget_link):
     PTS=widget_soup.find_all('td',{"data-stat":"pts_per_g"})
     
     #Returns us the text for the final season for the specified stat category
-    print(PTS[final_season-1].get_text())
+    #print(PTS[final_season-1].get_text())
     return PTS[final_season-1].get_text()
 
 
