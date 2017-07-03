@@ -23,12 +23,12 @@ all_players={}
 
 #Establishing list to track comments
 if not os.path.isfile("C:\\Users\davecrob2\\Documents\\GitHub\\BallerBot\\posts_replied_to.txt"):
-    replied_to = []
+    posts_replied_to = []
 else:
     with open("C:\\Users\davecrob2\\Documents\\GitHub\\BallerBot\\posts_replied_to.txt","r") as f:
-        replied_to = f.read()
-        replied_to = replied_to.split("\n")
-        replied_to=list(filter(None,replied_to))
+        posts_replied_to = f.read()
+        posts_replied_to = posts_replied_to.split("\n")
+        posts_replied_to=list(filter(None,posts_replied_to))
 
 
 for a in ascii_lowercase:
@@ -45,11 +45,11 @@ for link in link_list:
         #print("There are no names here")
 
 #Code for replying to posts
-for submission in subreddit.hot(limit = 10):
+for submission in subreddit.rising(limit=50):
     #print(list(submission.comments))
     for comment in submission.comments:
         #Checks that comments aren't replied to
-        if comment.id not in replied_to:
+        if comment.id not in posts_replied_to:
             for key in all_players:
                 if key in comment.body:
                     #To extract first letter of last name
@@ -59,11 +59,11 @@ for submission in subreddit.hot(limit = 10):
                     #Replying to comments
                     comment.reply({key+""" 
                                              """ + stat_scraper(widget_link)})
-        replied_to.append(comment.id)
+                    posts_replied_to.append(comment.id)
 
 #Writing comment ids to list                
 with open("C:\\Users\davecrob2\\Documents\\GitHub\\BallerBot\\posts_replied_to.txt","w") as f:
-    for post_id in replied_to:
+    for post_id in posts_replied_to:
         f.write(post_id + "\n")
                 
 
