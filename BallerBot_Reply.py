@@ -15,7 +15,7 @@ import os
 reddit = praw.Reddit('ballerbot')
 
 #Selects subreddit
-subreddit = reddit.subreddit('ballerbot')
+subreddit = reddit.subreddit('nba')
 #List to store each basketball reference link
 link_list = []
 #Dictionary to store all player names and IDs
@@ -29,6 +29,7 @@ else:
         replied_to = f.read()
         replied_to = replied_to.split("\n")
         replied_to=list(filter(None,replied_to))
+
 
 for a in ascii_lowercase:
     link = "http://www.basketball-reference.com/players/%(a)s/" % {"a":a}
