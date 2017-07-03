@@ -18,18 +18,18 @@ reddit = praw.Reddit('ballerbot')
 subreddit = reddit.subreddit('ballerbot')
 #List to store each basketball reference link
 link_list = []
-
 #Dictionary to store all player names and IDs
 all_players={}
 
+#Establishing list to track comments
 if not os.path.isfile("C:\\Users\davecrob2\\Documents\\GitHub\\BallerBot\\posts_replied_to.txt"):
-    posts_replied_to = []
+    replied_to = []
 else:
     with open("C:\\Users\davecrob2\\Documents\\GitHub\\BallerBot\\posts_replied_to.txt","r") as f:
-        posts_replied_to = f.read()
-        posts_replied_to = posts_replied_to.split("\n")
-        posts_replied_to=list(filter(None,posts_replied_to))
-#
+        replied_to = f.read()
+        replied_to = replied_to.split("\n")
+        replied_to=list(filter(None,replied_to))
+
 for a in ascii_lowercase:
     link = "http://www.basketball-reference.com/players/%(a)s/" % {"a":a}
     link_list.append(link)
@@ -41,27 +41,28 @@ for link in link_list:
         all_players.update(bb_scrape(link))
     except AttributeError:
         continue
-        print("There are no names here")
+        #print("There are no names here")
 
 #Code for replying to posts
 for submission in subreddit.hot(limit = 10):
-    for top_level_comment in submission.comments:
-        for key in all_players:
-            if key in top_level_comment.body:
-                if top_level_comment.id not in posts_replied_to:
-                #To extract first letter of last name
+    #print(list(submission.comments))
+    for comment in submission.comments:
+        #Checks that comments aren't replied to
+        if comment.id not in replied_to:
+            for key in all_players:
+                if key in comment.body:
+                    #To extract first letter of last name
                     letter = all_players[key]
                     #BR Widget that we scrape for statistics
                     widget_link='https://widgets.sports-reference.com/wg.fcgi?site=bbr&url=/players/%(letter)s/%(id)s.html&div=div_per_game' % {"letter":letter[0],'id':all_players[key]}
                     #Replying to comments
-                    top_level_comment.reply(stat_scraper(widget_link))
-                    posts_replied_to.append(top_level_comment.id)
-                    
+                    comment.reply({key+""" 
+                                             """ + stat_scraper(widget_link)})
+        replied_to.append(comment.id)
+
+#Writing comment ids to list                
 with open("C:\\Users\davecrob2\\Documents\\GitHub\\BallerBot\\posts_replied_to.txt","w") as f:
-    for post_id in posts_replied_to:
+    for post_id in replied_to:
         f.write(post_id + "\n")
                 
-                #if top_level_comment.id not in replied_to:
-                    #top_level_comment.reply("It works!")
-            #print("Bot replying to: ", submission.title)
 
