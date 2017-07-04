@@ -15,12 +15,12 @@ import os
 reddit = praw.Reddit('ballerbot')
 
 #Selects subreddit
-subreddit = reddit.subreddit('nba')
+subreddit = reddit.subreddit('ballerbot')
 #List to store each basketball reference link
 link_list = []
 #Dictionary to store all player names and IDs
 all_players={}
-
+author = '/u/BallerBot'
 #Establishing list to track comments
 if not os.path.isfile("C:\\Users\davecrob2\\Documents\\GitHub\\BallerBot\\posts_replied_to.txt"):
     posts_replied_to = []
@@ -45,22 +45,18 @@ for link in link_list:
         #print("There are no names here")
 
 #Code for replying to posts
-for submission in subreddit.rising(limit=50):
-    #print(list(submission.comments))
-    for comment in submission.comments:
-        #Checks that comments aren't replied to
-        if comment.id not in posts_replied_to:
-            for key in all_players:
-                if key in comment.body:
-                    #To extract first letter of last name
-                    letter = all_players[key]
-                    #BR Widget that we scrape for statistics
-                    widget_link='https://widgets.sports-reference.com/wg.fcgi?site=bbr&url=/players/%(letter)s/%(id)s.html&div=div_per_game' % {"letter":letter[0],'id':all_players[key]}
-                    #Replying to comments
-                    comment.reply({key+""" 
-                                             """ + stat_scraper(widget_link)})
-                    posts_replied_to.append(comment.id)
-
+for mention in reddit.inbox.mentions(limit=200):
+    if mention.id not in posts_replied_to:
+        for key in all_players:
+            if key in mention.body:
+                #To extract first letter of last name
+                letter = all_players[key]
+                #BR Widget that we scrape for statistics
+                widget_link='https://widgets.sports-reference.com/wg.fcgi?site=bbr&url=/players/%(letter)s/%(id)s.html&div=div_per_game' % {"letter":letter[0],'id':all_players[key]}
+                #Replying to comments
+                mention.reply({key+""" 
+                                         """ + stat_scraper(widget_link)})
+                posts_replied_to.append(mention.id)
 #Writing comment ids to list                
 with open("C:\\Users\davecrob2\\Documents\\GitHub\\BallerBot\\posts_replied_to.txt","w") as f:
     for post_id in posts_replied_to:
