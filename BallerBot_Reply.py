@@ -15,7 +15,7 @@ import os
 reddit = praw.Reddit('ballerbot')
 
 #Selects subreddit
-subreddit = reddit.subreddit('ballerbot')
+subreddit = reddit.subreddit('all')
 #List to store each basketball reference link
 link_list = []
 #Dictionary to store all player names and IDs
